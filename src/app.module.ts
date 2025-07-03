@@ -18,6 +18,12 @@ import { AuthModule } from './auth/auth.module';
         database: configService.get('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         // synchronize: true,
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          }
+        }
       }),
       inject: [ConfigService],
     }),
@@ -32,4 +38,4 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
