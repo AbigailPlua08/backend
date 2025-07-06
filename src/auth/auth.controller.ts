@@ -1,4 +1,4 @@
-import { Controller, Post, Body, NotFoundException } from '@nestjs/common';
+import { Controller, Post, Body, NotFoundException, HttpCode } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -26,9 +26,8 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
-
-
   @Post('forgot-password')
+  @HttpCode(201)
   async forgotPassword(@Body('email') email: string) {
     const user = await this.userService.findByEmail(email);
     if (!user) throw new NotFoundException('Usuario no encontrado');
@@ -39,6 +38,7 @@ export class AuthController {
   }
 
   @Post('reset-password')
+  @HttpCode(201)
   async resetPassword(
     @Body('token') token: string,
     @Body('newPassword') newPassword: string,
