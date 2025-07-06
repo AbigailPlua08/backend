@@ -12,7 +12,6 @@ export class UserService {
     ) { }
 
     async findByEmail(email: string): Promise<User | null> {
-        console.log('Buscando usuario por email:', email);
         return await this.userRepository.findOne({
             where: {
                 email: email
